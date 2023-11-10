@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS SIMPLE GAME EXERCISE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+        /*
+        https://colorhunt.co/palette/fff5e0ff6969bb2525141e46
+        */
+      body {
+        background-color: #FFF5E0;
+        font-family: 'Black Ops One', cursive;
+        text-align: center;
+      }
+      .header{
+        background-color: #FF6969;
+        display: inline-block;
+        width: 60%;
+      }
+    
+      button{
+        width: 20%;
+        padding: 1rem;
+      }
+      #result {
+        font-size: 24px;
+        margin-top: 20px;
+      }
+    </style>
+
+</head>
+<body>
+    <div class="header">
+        <h1>ROCK PAPER SCISSORS GAME</h1>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+        <p id="result"></p>
+
+    </div>
+    <script>
+        // Create a variable for containing multiple choices Rock, Paper, Scissors
+        const choices = ['rock', 'paper', 'scissors'];
+        // let selectedButtonId = button.id;  
+
+        // Declare a varaible for us to select the buttons using the element selector
+        const userChoiceButtons = document.querySelectorAll('button');
+        // Use  forEach for iterating through buttons
+        userChoiceButtons.forEach(button => {
+            button.addEventListener('click', ()=>{
+                // declare a varaible and store the reference to the button id
+                const userChoice = button.id;
+                // Declare a variable named computerChoice and use Math.floor and Math.random for the choices that the computer will produce.
+                let computerChoice;
+                computerChoice = choices[Math.floor(Math.random() * choices.length)];
+                console.log(computerChoice);
+                // Declare a variable that will determine the result or winner 
+                // store a function in the declared variable named determineWinner
+                const result = determineWinner(userChoice, computerChoice);
+                // Access the dom to manipulate the empty paragraph element textContent assing a value of template literal with the variable userChoice text
+                // You chose ${} , Computer chose ${}. ${result};
+                document.getElementById('result').textContent = `You chose ${userChoice}, Computer chose ${computerChoice}. ${result}`
+            })
+        });
+
+        // function that will determineWinner 
+        function determineWinner(userChoice, computerChoice){
+            // if userChoice is  equal (use strict equality operator) to computer choice we want to return "It's a tie!"
+            if (userChoice === computerChoice) {
+            return "It's a tie!";
+            }
+            // if userChoice is equal (use strict equality operator) to rock and computerChoice is equal to scissors or 
+            // userChoice is euqal (use strict equality operator) to paper and computerchoice is equal to rock or 
+            // userChoice is equal (use strict equality operator) to scissors and computerChoice is equal to paper 
+            // Return 'You win!'
+            // defulat else that will return Computer wins
+
+     
+            
+            if ((userChoice === 'rock' && computerChoice === 'scissors') ||
+              (userChoice === 'paper' && computerChoice === 'rock') || 
+              (userChoice === 'scissors' && computerChoice === 'paper')){
+                console.log('You win')
+                return 'You win!';
+
+            }else{
+                console.log('You lose')
+                return 'Computer Wins!';
+            }
+
+        }
+      
+// (userChoice === "paper")
+// (userChoice === "scissors")
+
+// (selectedButtonId === 'rock' && computerChoice === 'scissors') ||
+//  (selectedButtonId === 'paper' && computerChoice === 'rock') ||
+//                     (selectedButtonId === 'scissors' && computerChoice === 'paper')
+//                 ) {
+//                     return 'You win!';
+//                 } else if (selectedButtonId === computerChoice) {
+//                     return "It's a tie!";
+//                 }
+
+
+    </script>
+</body>
+</html>
